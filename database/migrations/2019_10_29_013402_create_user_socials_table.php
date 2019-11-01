@@ -49,4 +49,5 @@ class CreateUserSocialsTable extends Migration
         Schema::dropIfExists('user_socials');
     }
     */
+    }
 }

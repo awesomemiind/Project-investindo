@@ -24,6 +24,7 @@ class UserService
             $this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_CREATE);
             $usuario = $this->repository->create($data);
 
+
             return [
                 'success' => true,
                 'message' => "Usuaria cadastrado",
@@ -32,10 +33,8 @@ class UserService
         } 
         catch(\Exception $e)
         {
-            return [
-                'success' => false,
-                'message' => "Erro de execução",
-            ];
+
+
         }
     }
 

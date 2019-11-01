@@ -49,7 +49,9 @@ class UsersController extends Controller
      */
     public function index()
     {
-        return view('user.index');
+        $users = $this->repository->all();
+
+        return view('user.indexa')->with(compact('users'));
     }
 
     /**
@@ -64,16 +66,16 @@ class UsersController extends Controller
     public function store(UserCreateRequest $request)
     {
         $request = $this->service->store($request->all());
+        $usuario = $request['success'] ? $request['data'] : null;
 
-        if($request['success'])
-        {
-            $usuario = $request['data'];
-        } else {
-            $usuario = null;
-        }
+        session()->flash('success', [
+            'success'  => $request['success'],
+            'message'  => $request['message'],
+        ]);
 
         return view('user.index', [
             'usuario' => $usuario,
+            'message' => $request['message']
         ]);
     }
 
